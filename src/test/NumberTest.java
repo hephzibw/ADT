@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -23,9 +24,8 @@ import static junit.framework.Assert.assertEquals;
 public class NumberTest {
     @Test
     public void itShouldCreateNumberTakingFirstOptionAsTheBaseAndOthersAsTheNumber() throws IOException {
-        Base base = new Base();
         File file = new File("input1.txt");
-        base.initializeBase(file);
+        Base.initializeBase(file);
         Number number = Number.createNumber("8 ibo");
         List<Integer> list = Arrays.asList(1, 0, 4);
 
@@ -35,7 +35,6 @@ public class NumberTest {
 
     @Test
     public void itShouldPrintTheNumberOnTheOstream() throws IOException {
-        Base base = new Base();
         File file = new File("input1.txt");
         Base.initializeBase(file);
         Number number = Number.createNumber("8 ibo");
@@ -43,5 +42,22 @@ public class NumberTest {
 //        Arrays outContent;
 //        assertEquals("(abc)8", outContent.toString());
 //
+    }
+
+    @Test
+    public void itShouldConvertANumberToGivenBaseAndReturnIt() throws IOException {
+        File file = new File("input1.txt");
+        Base.initializeBase(file);
+        Number number = Number.createNumber("8 ibo");
+        Number number1 = Number.convert(number, 2);
+        assertEquals(number1.getBase(), 2);
+        assertEquals(number1.getPositionValue(), Arrays.asList(1, 0, 0, 0, 1, 0, 0));
+    }
+
+    @Test
+    public void toDecimalValueShouldReturnDecimalValueOfNumber() {
+
+        Number number = new Number(8, new LinkedList<Integer>(Arrays.asList(1, 3, 4, 5)));
+        assertEquals(number.toDecimalValue(), 741);
     }
 }
