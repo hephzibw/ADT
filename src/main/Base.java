@@ -11,26 +11,18 @@ import java.util.Arrays;
  * To change this template use File | Settings | File Templates.
  */
 public class Base {
-    String translator[];
+    public static String[] translator;
 
-    public Integer initializeBase(File file) throws IOException {
+    public static Integer initializeBase(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         while ((line = reader.readLine()) != null) {
-            this.translator = line.split("(?!^)");
+            translator = line.split("(?!^)");
         }
         return 62;
     }
 
-    public void setTranslator(String[] trans) {
-        translator = trans;
-    }
-
-    public String[] getTranslator() {
-        return translator;
-    }
-
-    public int lookup(String b) {
+    public static int lookup(String b) {
        return Arrays.asList(translator).indexOf(b);
     }
 }

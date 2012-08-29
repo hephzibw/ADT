@@ -21,32 +21,18 @@ public class BaseTest {
     public void initializeBaseFileShouldSetIndexOfDigits() throws IOException {
         String trans[] = {"b", "i", "g", "s", "o", "u", "n", "d"};
         File file = new File("input1.txt");
-        Base base = new Base();
-        int maxBase = base.initializeBase(file);
-        assertEquals(base.getTranslator(), trans);
+        int maxBase = Base.initializeBase(file);
+        assertEquals(Base.translator, trans);
         assertEquals(maxBase, 62);
     }
 
     @Test
-    public void getTranslator() {
-        Base base = new Base();
-        String trans[] = {"0", "b", "g", "d"};
-        base.setTranslator(trans);
-        assertEquals(trans, base.getTranslator());
-
-    }
-
-    @Test
     public void itShouldReturnTheIndexAssociatedWithTheCharacter() throws IOException {
-        String trans[] = {"b", "i", "g", "s", "o", "u", "n", "d"};
         File file = new File("input1.txt");
-        Base base = new Base();
-        base.initializeBase(file);
-        assertEquals(base.lookup("b"), 0);
-        assertEquals(base.lookup("d"), 7);
-        assertEquals(base.lookup("s"),3);
-
-
+        Base.initializeBase(file);
+        assertEquals(Base.lookup("b"), 0);
+        assertEquals(Base.lookup("d"), 7);
+        assertEquals(Base.lookup("s"),3);
     }
 
 

@@ -23,22 +23,22 @@ import static junit.framework.Assert.assertEquals;
 public class NumberTest {
     @Test
     public void itShouldCreateNumberTakingFirstOptionAsTheBaseAndOthersAsTheNumber() throws IOException {
-        Base base=new Base();
-        File file=new File("input1.txt");
+        Base base = new Base();
+        File file = new File("input1.txt");
         base.initializeBase(file);
-        Number number = new Number();
-        List<String> list = Arrays.asList("a","b","c");
+        Number number = Number.createNumber("8 ibo");
+        List<Integer> list = Arrays.asList(1, 0, 4);
 
-        number.createNumber("8 abc");
         assertEquals(number.getBase(), 8);
         assertEquals(number.getPositionValue(), list);
     }
 
     @Test
-    public void itShouldPrintTheNumberOnTheOstream() {
-
-        Number number = new Number();
-        number.createNumber("8 abc");
+    public void itShouldPrintTheNumberOnTheOstream() throws IOException {
+        Base base = new Base();
+        File file = new File("input1.txt");
+        Base.initializeBase(file);
+        Number number = Number.createNumber("8 ibo");
         Number.printNumber(number);
 //        Arrays outContent;
 //        assertEquals("(abc)8", outContent.toString());
