@@ -55,6 +55,14 @@ public class NumberTest {
     }
 
     @Test
+    public void itShouldConvertNumberFromBase10To5(){
+        Number number=new Number(10,new LinkedList<Integer>(Arrays.asList(3,5)));
+        Number newNum = Number.convert(number,5);
+        assertEquals(newNum.getBase(),5);
+        assertEquals(newNum.getPositionValue(),new LinkedList<Integer>(Arrays.asList(1,2,0)));
+    }
+
+    @Test
     public void toDecimalValueShouldReturnDecimalValueOfNumber() {
 
         Number number = new Number(8, new LinkedList<Integer>(Arrays.asList(1, 3, 4, 5)));

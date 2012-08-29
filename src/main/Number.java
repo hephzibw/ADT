@@ -58,12 +58,11 @@ public class Number {
 
         LinkedList<Integer> newList = new LinkedList();
         ListIterator<Integer> integerIterator = list.listIterator(list.size());
-        while (integerIterator.hasPrevious())  {
-            newList.add((Integer)integerIterator.previous());
+        while (integerIterator.hasPrevious()) {
+            newList.add((Integer) integerIterator.previous());
         }
-        number.base = base;
-        number.positionValue = (LinkedList<Integer>) newList;
-        return number;
+        Number newNumber = new Number(base, (LinkedList<Integer>) newList);
+        return newNumber;
     }
 
     public int toDecimalValue() {
