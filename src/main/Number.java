@@ -2,13 +2,6 @@ package main;
 
 import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hephzibah
- * Date: 8/26/12
- * Time: 10:55 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Number {
     public int base;
     public LinkedList<Integer> positionValue;

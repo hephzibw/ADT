@@ -9,13 +9,6 @@ import java.util.LinkedList;
 
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hephzibah
- * Date: 8/29/12
- * Time: 6:11 PM
- * To change this template use File | Settings | File Templates.
- */
 public class OrderTest {
         @Test
     public void itShouldReturnEqualIfTheTwoNumbersAreEqual() {
@@ -54,7 +47,10 @@ public class OrderTest {
     }
 
     @Test
-    public void verifyEnumValues() {
-//        assertEquals(Order.values(),LESSER, GREATER,EQUAL) ;
+    public void itShouldConvertNumbersToTheSameBaseAndCompare() {
+        Number number1 = new Number(10, new LinkedList<Integer>(Arrays.asList(4, 2, 3, 4)));
+        Number number2 = new Number(5, new LinkedList<Integer>(Arrays.asList(3, 5, 3, 3)));
+        assertEquals(Order.compare(number1, number2), Order.OrderType.GREATER);
     }
+
 }
