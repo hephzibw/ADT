@@ -16,12 +16,10 @@ public class Order {
                     if (number1.getPositionValue().size() == 1 && number2.getPositionValue().size() == 1) {
                         orderType = OrderType.EQUAL;
                     } else {
-                        System.out.println("I am here");
                         LinkedList<Integer> posVal1 = (LinkedList<Integer>) number1.getPositionValue().clone();
                         posVal1.removeFirst();
                         LinkedList<Integer> posVal2 = (LinkedList<Integer>) number2.getPositionValue().clone();
                         posVal2.removeFirst();
-                        System.out.print("now");
                         return compare(new Number(number1.getBase(), posVal1), new Number(number2.getBase(), posVal2));
                     }
                 } else {
