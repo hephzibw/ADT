@@ -10,7 +10,7 @@ public class Order {
 
     public static OrderType compare(Number number1, Number number2) {
         OrderType orderType=null;
-        if (number1.getBase() == number2.getBase()) {
+        if (number1.getBase()==number2.getBase()) {
             if (number1.getPositionValue().size() == number2.getPositionValue().size()) {
                 if (number1.getPositionValue().getFirst().equals(number2.getPositionValue().getFirst())) {
                     if (number1.getPositionValue().size() == 1 && number2.getPositionValue().size() == 1) {

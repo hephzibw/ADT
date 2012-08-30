@@ -30,7 +30,7 @@ public class Number {
         return positionValue;
     }
 
-    public static void printNumber(Number number) {
+    public static String printNumber(Number number) {
         String str = "(";
         Iterator<Integer> iterator = number.getPositionValue().iterator();
         while (iterator.hasNext()) {
@@ -38,7 +38,7 @@ public class Number {
             str += Base.translator[value];
         }
         str += ")" + number.getBase();
-        System.out.print(str);
+        return str;
     }
 
     public static Number convert(Number number, int base) {

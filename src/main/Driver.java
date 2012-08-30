@@ -1,6 +1,6 @@
 package main;
 
-import java.util.ArrayList;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,61 +12,56 @@ import java.util.ArrayList;
 
 public class Driver {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        File file1 = new File("input1.txt");
+        Base.initializeBase(file1);
+        File file2 = new File("input2.txt");
+        Number[] dynamicArray = createAndPopulateDynamicNumberArray(file2);
 
-    }
-
-    public static Number quickSelect(Number[] numbers, int size, int k) {
-        int start = 0;
-        int end = size - 1;
-        int index = 0;
-        if (size == 1) {
-            index = 0;
-        } else {
-            while (start <= end) {
-                int pivotIndex = partition(numbers, start, end);
-                System.out.println(pivotIndex);
-                int pivotIndexDist = pivotIndex - start + 1;
-                if (k == pivotIndexDist) {
-                    index = pivotIndex;
-                    break;
-                } else {
-                    if (k > pivotIndexDist) {
-                        k = k - pivotIndexDist;
-                        start = pivotIndex + 1;
-                    } else {
-                        end = pivotIndex - 1;
-                    }
-                }
-            }
-
+        int size = dynamicArray.length;
+        System.out.println(size);
+        int k = Integer.parseInt("3");
+        if (k > size) {
+            k = k / 2;
         }
-        return numbers[index];
+        Number required = Selector.quickSelect(dynamicArray, size, k);
+        FileWriter fstream = new FileWriter("output1.txt");
+        BufferedWriter out = new BufferedWriter(fstream);
+        String s = Number.printNumber(required);
+        System.out.println(s);
+        out.write(s);
+        //Close the output stream
+        out.close();
     }
 
-    private static int partition(Number[] numbers, int start, int end) {
-        int pivot = (start + end) / 2;
-        Number pivotValue = numbers[pivot];
-        while (start < end) {
-            while (Order.compare(numbers[start], pivotValue).equals(Order.OrderType.LESSER)) {
-                start++;
-            }
-
-            while (Order.compare(numbers[end], pivotValue).equals(Order.OrderType.GREATER)) {
-                end--;
-            }
-            if (start >= end) {
-                break;
-            }
-            swap(numbers, start, end);
+    private static Number[] populateDynamicArray(File file2, Number[] dynamicArray) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file2));
+        String line;
+        int i = 0;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+            dynamicArray[i] = Number.createNumber(line);
+            i++;
         }
-        return start;
+        reader.close();
+        return dynamicArray;
     }
 
-    public static void swap(Number[] numbers, int start, int end) {
-        Number temp = numbers[start];
-        numbers[start] = new Number(numbers[end].getBase(), numbers[end].getPositionValue());
-        numbers[end] = new Number(temp.getBase(), temp.getPositionValue());
+    private static Number[] createAndPopulateDynamicNumberArray(File file) throws IOException {
+        Number[] dynamicArray = createDynamicArray(file);
+        return populateDynamicArray(file, dynamicArray);
+    }
+
+    private static Number[] createDynamicArray(File file) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        Integer lineCount = 0;
+        while ((line = reader.readLine()) != null) {
+            lineCount++;
+        }
+        reader.close();
+        Number[] numbers = new Number[lineCount];
+        return numbers;
     }
 
 }
