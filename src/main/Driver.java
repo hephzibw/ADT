@@ -10,23 +10,7 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 
-//function select(list, left, right, k)
-//        if left = right // If the list contains only one element
-//        return list[left]  // Return that element
-//        // select pivotIndex between left and right
-//        pivotNewIndex := partition(list, left, right, pivotIndex)
-//        pivotDist := pivotNewIndex - left + 1
-//        // The pivot is in its final sorted position,
-//        // so pivotDist reflects its 1-based position if list were sorted
-//        if pivotDist = k
-//        return list[pivotNewIndex]
-//        else if k < pivotDist
-//        return select(list, left, pivotNewIndex - 1, k)
-//        else
-//        return select(list, pivotNewIndex + 1, right, k - pivotDist)
-
 public class Driver {
-    public static Number[] numbers;
 
     public static void main(String[] args) {
 
@@ -39,16 +23,16 @@ public class Driver {
         if (size == 1) {
             index = 0;
         } else {
-            while (start < end) {
-                System.out.println(222222);
+            while (start <= end) {
                 int pivotIndex = partition(numbers, start, end);
                 System.out.println(pivotIndex);
-                if (k == pivotIndex) {
-                    index = pivotIndex - 1;
-                    System.out.println(66666666);
+                int pivotIndexDist = pivotIndex - start + 1;
+                if (k == pivotIndexDist) {
+                    index = pivotIndex;
                     break;
                 } else {
-                    if (k > pivotIndex) {
+                    if (k > pivotIndexDist) {
+                        k = k - pivotIndexDist;
                         start = pivotIndex + 1;
                     } else {
                         end = pivotIndex - 1;
@@ -63,7 +47,7 @@ public class Driver {
     private static int partition(Number[] numbers, int start, int end) {
         int pivot = (start + end) / 2;
         Number pivotValue = numbers[pivot];
-        while (start <= end && !numbers[start].equals(pivotValue)) {
+        while (start < end) {
             while (Order.compare(numbers[start], pivotValue).equals(Order.OrderType.LESSER)) {
                 start++;
             }
@@ -71,15 +55,18 @@ public class Driver {
             while (Order.compare(numbers[end], pivotValue).equals(Order.OrderType.GREATER)) {
                 end--;
             }
-            swap(numbers,start,end);
+            if (start >= end) {
+                break;
+            }
+            swap(numbers, start, end);
         }
         return start;
     }
 
-    private static void swap(Number[] numbers, int start, int end) {
+    public static void swap(Number[] numbers, int start, int end) {
         Number temp = numbers[start];
-        numbers[start] = numbers[end];
-        numbers[end] = temp;
+        numbers[start] = new Number(numbers[end].getBase(), numbers[end].getPositionValue());
+        numbers[end] = new Number(temp.getBase(), temp.getPositionValue());
     }
 
 }
