@@ -1,4 +1,5 @@
 package main;
+
 public class Selector {
     public static Number quickSelect(Number[] numbers, int size, int k) {
         int start = 0;
@@ -29,8 +30,7 @@ public class Selector {
     }
 
     private static int partition(Number[] numbers, int start, int end) {
-        int pivot = (start + end) / 2;
-        Number pivotValue = numbers[pivot];
+        Number pivotValue = getMedian(numbers, start, end);
         while (start < end) {
             while (Order.compare(numbers[start], pivotValue).equals(Order.OrderType.LESSER)) {
                 start++;
@@ -47,9 +47,27 @@ public class Selector {
         return start;
     }
 
+    private static Number getMedian(Number[] numbers, int start, int end) {
+        Number[] medianArray = new Number[]{numbers[start], numbers[start + (end - start) / 4], numbers[start + (end - start) / 2], numbers[end - (end - start) / 4], numbers[end]};
+        return insertionSort(medianArray);
+    }
+
+    private static Number insertionSort(Number[] medians) {
+        for (int i = 1; i < medians.length; i++) {
+            int index = i;
+            Number item = medians[index];
+            while (index > 0 && Order.compare(medians[index - 1], item) == Order.OrderType.GREATER) {
+                swap(medians, index - 1, index);
+                index--;
+            }
+            medians[index] = item;
+        }
+        return medians[2];
+    }
+
     private static void swap(Number[] numbers, int start, int end) {
         Number temp = numbers[start];
-        numbers[start] = new Number(numbers[end].getBase(), numbers[end].getPositionValue());
-        numbers[end] = new Number(temp.getBase(), temp.getPositionValue());
+        numbers[start] = numbers[end];
+        numbers[end] = temp;
     }
 }

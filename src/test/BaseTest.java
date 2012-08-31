@@ -1,13 +1,13 @@
 package test;
 
 import main.Base;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,22 +17,31 @@ import static org.junit.Assert.assertThat;
  * To change this template use File | Settings | File Templates.
  */
 public class BaseTest {
-    @Test
-    public void initializeBaseFileShouldSetIndexOfDigits() throws IOException {
-        String trans[] = {"b", "i", "g", "s", "o", "u", "n", "d"};
+    @Before
+    public void initialize() throws Exception {
         File file = new File("input1.txt");
-        int maxBase = Base.initializeBase(file);
-        assertEquals(Base.translator, trans);
-        assertEquals(maxBase, 62);
+        Base.initializeBase(file);
     }
 
     @Test
-    public void itShouldReturnTheIndexAssociatedWithTheCharacter() throws IOException {
-        File file = new File("input1.txt");
-        Base.initializeBase(file);
-        assertEquals(Base.lookup("b"), 0);
-        assertEquals(Base.lookup("d"), 7);
-        assertEquals(Base.lookup("s"),3);
+    public void initializeBaseFileShouldSetIndexOfDigits() throws Exception {
+        HashMap<Integer, Character> Map = new HashMap<Integer, Character>();
+        Map.put(0, 'b');
+        Map.put(1, 'i');
+        Map.put(2, 'g');
+        Map.put(3, 's');
+        Map.put(4, 'o');
+        Map.put(5, 'u');
+        Map.put(6, 'n');
+        Map.put(7, 'd');
+        assertEquals(Base.translator, Map);
+    }
+
+    @Test
+    public void itShouldReturnTheIndexAssociatedWithTheCharacter(){
+        assertEquals(Base.lookup('b'), 0);
+        assertEquals(Base.lookup('d'), 7);
+        assertEquals(Base.lookup('s'), 3);
     }
 
 

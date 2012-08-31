@@ -23,7 +23,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class NumberTest {
     @Test
-    public void itShouldCreateNumberTakingFirstOptionAsTheBaseAndOthersAsTheNumber() throws IOException {
+    public void itShouldCreateNumberTakingFirstOptionAsTheBaseAndOthersAsTheNumber() throws Exception {
         File file = new File("input1.txt");
         Base.initializeBase(file);
         Number number = Number.createNumber("8 ibo");
@@ -34,7 +34,7 @@ public class NumberTest {
     }
 
     @Test
-    public void itShouldPrintTheNumberOnTheOstream() throws IOException {
+    public void itShouldPrintTheNumberOnTheOstream() throws Exception {
         File file = new File("input1.txt");
         Base.initializeBase(file);
         Number number = Number.createNumber("8 ibo");
@@ -45,7 +45,7 @@ public class NumberTest {
     }
 
     @Test
-    public void itShouldConvertANumberToGivenBaseAndReturnIt() throws IOException {
+    public void itShouldConvertANumberToGivenBaseAndReturnIt() throws Exception {
         File file = new File("input1.txt");
         Base.initializeBase(file);
         Number number = Number.createNumber("8 ibo");

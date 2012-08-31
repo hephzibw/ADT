@@ -1,28 +1,37 @@
 package main;
 
 import java.io.*;
-import java.util.Arrays;
+import java.util.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hephzibah
- * Date: 8/26/12
- * Time: 7:50 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Base {
-    public static String[] translator;
+    public static HashMap<Integer, Character> translator = new HashMap<Integer, Character>();
 
-    public static Integer initializeBase(File file) throws IOException {
+
+    public static Integer initializeBase(File file) throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line;
         while ((line = reader.readLine()) != null) {
-            translator = line.split("(?!^)");
+            line = line.trim();
+            for (int i = 0; i < line.length(); i++) {
+                if (!translator.containsValue(line.charAt(i))) {
+                    translator.put(i, line.charAt(i));
+                }
+            }
         }
+        reader.close();
         return 62;
     }
 
-    public static int lookup(String b) {
-       return Arrays.asList(translator).indexOf(b);
+    public static int lookup(char b) {
+        Set set = translator.keySet();
+        Iterator iterator = set.iterator();
+        Integer index = null;
+        while (iterator.hasNext()) {
+            Integer key = (Integer) iterator.next();
+            if (translator.get(key).equals(b)) {
+                index = key;
+            }
+        }
+        return index;
     }
 }

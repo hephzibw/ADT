@@ -12,25 +12,23 @@ import java.io.*;
 
 public class Driver {
 
-    public static void main(String[] args) throws IOException {
-        File file1 = new File("input1.txt");
+    public static void main(String[] args) throws Exception {
+        File file1 = new File(args[0]);
         Base.initializeBase(file1);
-        File file2 = new File("input2.txt");
+        File file2 = new File(args[1]);
         Number[] dynamicArray = createAndPopulateDynamicNumberArray(file2);
 
         int size = dynamicArray.length;
-        System.out.println(size);
-        int k = Integer.parseInt("3");
+        int k = Integer.parseInt(args[2]);
         if (k > size) {
             k = k / 2;
         }
         Number required = Selector.quickSelect(dynamicArray, size, k);
-        FileWriter fstream = new FileWriter("output1.txt");
+        FileWriter fstream = new FileWriter(args[3]);
         BufferedWriter out = new BufferedWriter(fstream);
         String s = Number.printNumber(required);
         System.out.println(s);
         out.write(s);
-        //Close the output stream
         out.close();
     }
 

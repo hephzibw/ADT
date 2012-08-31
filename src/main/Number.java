@@ -16,7 +16,7 @@ public class Number {
         String[] temp_array = result[1].split("(?!^)");
         Integer[] new_array = new Integer[temp_array.length];
         for (int i = 0; i < temp_array.length; i++) {
-            new_array[i] = Base.lookup(temp_array[i]);
+            new_array[i] = Base.lookup(temp_array[i].charAt(0));
         }
         Number number = new Number(Integer.parseInt(result[0]), new LinkedList(Arrays.asList(new_array)));
         return number;
@@ -35,7 +35,7 @@ public class Number {
         Iterator<Integer> iterator = number.getPositionValue().iterator();
         while (iterator.hasNext()) {
             Integer value = (Integer) iterator.next();
-            str += Base.translator[value];
+            str += Base.translator.get(value);
         }
         str += ")" + number.getBase();
         return str;
