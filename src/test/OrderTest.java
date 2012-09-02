@@ -25,6 +25,17 @@ public class OrderTest {
         assertEquals(Order.compare(number1, number2), Order.OrderType.GREATER);
     }
 
+    @Test
+    public void compareShouldNotModifyTheOriginalNumbers(){
+        Number number1 = new Number(10, new LinkedList<Integer>(Arrays.asList(1, 2, 3)));
+        Number number2 = new Number(10, new LinkedList<Integer>(Arrays.asList(1,2,4)));
+                  Order.compare(number1,number2);
+        assertEquals(number2.getBase(),10);
+        assertEquals(number2.getPositionValue(),new LinkedList<Integer>(Arrays.asList(1,2, 4)));
+        assertEquals(number1.getBase(),10);
+        assertEquals(number1.getPositionValue(),new LinkedList<Integer>(Arrays.asList(1,2, 3)));
+    }
+
      @Test
     public void itShouldReturnLesserIfBaseIsEqualAndNumberOfNodesInFirstIsLessThanOther() {
         Number number1 = new Number(10, new LinkedList<Integer>(Arrays.asList(1, 2, 3)));

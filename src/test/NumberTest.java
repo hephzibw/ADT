@@ -16,6 +16,14 @@ import static junit.framework.Assert.assertEquals;
 
 public class NumberTest {
     @Test
+    public void nextPositionsShouldReturnTheNumberWithDroppedFirstPositionValue(){
+        Number num1=new Number(8,new LinkedList<Integer>(Arrays.asList(1,2,3)));
+        Number modified=num1.nextPositions();
+        assertEquals( modified.getPositionValue(),new LinkedList<Integer>(Arrays.asList(2,3)));
+        assertEquals( modified.getBase(),8);
+    }
+
+    @Test
     public void itShouldCreateNumberTakingFirstOptionAsTheBaseAndOthersAsTheNumber() throws Exception {
         File file = new File("input1.txt");
         Base.initializeBase(file);

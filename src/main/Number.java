@@ -68,4 +68,10 @@ public class Number {
         }
         return value;
     }
+
+    public Number nextPositions() {
+        LinkedList<Integer> nextPositionValue = (LinkedList<Integer>) this.positionValue.clone();
+        nextPositionValue.removeFirst();
+        return new Number(this.base, nextPositionValue);
+    }
 }

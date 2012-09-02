@@ -13,8 +13,12 @@ public class Base {
         while ((line = reader.readLine()) != null) {
             line = line.trim();
             for (int i = 0; i < line.length(); i++) {
-                if (!translator.containsValue(line.charAt(i))) {
-                    translator.put(i, line.charAt(i));
+                char c = line.charAt(i);
+                if (!(Character.isDigit(c) || Character.isLetter(c))) {
+                    throw new Exception("Only Alphanumeric Characters allowed in first File.");
+                }
+                if (!translator.containsValue(c)) {
+                    translator.put(i, c);
                 }
             }
         }
