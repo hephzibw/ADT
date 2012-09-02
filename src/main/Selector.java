@@ -10,7 +10,6 @@ public class Selector {
         } else {
             while (start <= end) {
                 int pivotIndex = partition(numbers, start, end);
-                System.out.println(pivotIndex);
                 int pivotIndexDist = pivotIndex - start + 1;
                 if (k == pivotIndexDist) {
                     index = pivotIndex;

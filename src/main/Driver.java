@@ -2,42 +2,50 @@ package main;
 
 import java.io.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hephzibah
- * Date: 8/29/12
- * Time: 3:14 PM
- * To change this template use File | Settings | File Templates.
- */
-
 public class Driver {
 
+    private File inputFile1;
+    private File inputFile2;
+    private int k;
+    private FileWriter outputFileWriter;
+
+    public Driver(String inputFileName1, String inputFileName2, String k, String outputFileName) throws IOException {
+        this.inputFile1 = new File(inputFileName1);
+        this.inputFile2 = new File(inputFileName2);
+        this.k = Integer.parseInt(k);
+        this.outputFileWriter = new FileWriter(outputFileName);
+    }
+
     public static void main(String[] args) throws Exception {
-        File file1 = new File(args[0]);
-        Base.initializeBase(file1);
-        File file2 = new File(args[1]);
-        Number[] dynamicArray = createAndPopulateDynamicNumberArray(file2);
+        Driver driver = new Driver(args[0], args[1], args[2], args[3]);
+        Base.initializeBase(driver.inputFile1);
+        Number[] dynamicArray = driver.createAndPopulateDynamicNumberArray();
 
         int size = dynamicArray.length;
-        int k = Integer.parseInt(args[2]);
-        if (k > size) {
-            k = k / 2;
+        if (driver.k > size) {
+            driver.setK(driver.k/ 2);
         }
-        Number required = Selector.quickSelect(dynamicArray, size, k);
-        FileWriter fstream = new FileWriter(args[3]);
-        BufferedWriter out = new BufferedWriter(fstream);
-        String s = Number.printNumber(required);
-        System.out.println(s);
+        Number output = Selector.quickSelect(dynamicArray, size, driver.k);
+        driver.writeOutput(output);
+    }
+
+    private  void writeOutput(Number output) throws IOException {
+        BufferedWriter out = new BufferedWriter(this.outputFileWriter);
+        String s = Number.printNumber(output);
         out.write(s);
         out.close();
     }
 
-    private static Number[] populateDynamicArray(File file2, Number[] dynamicArray) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file2));
+    private int setK(int value) {
+        this.k = value;
+        return k;
+    }
+
+    private Number[] populateDynamicArray(Number[] dynamicArray) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(this.inputFile2));
         String line;
         int i = 0;
         while ((line = reader.readLine()) != null) {
-            System.out.println(line);
             dynamicArray[i] = Number.createNumber(line);
             i++;
         }
@@ -45,9 +53,9 @@ public class Driver {
         return dynamicArray;
     }
 
-    private static Number[] createAndPopulateDynamicNumberArray(File file) throws IOException {
-        Number[] dynamicArray = createDynamicArray(file);
-        return populateDynamicArray(file, dynamicArray);
+    private Number[] createAndPopulateDynamicNumberArray() throws IOException {
+        Number[] dynamicArray = createDynamicArray(this.inputFile2);
+        return populateDynamicArray(dynamicArray);
     }
 
     private static Number[] createDynamicArray(File file) throws IOException {
@@ -62,4 +70,19 @@ public class Driver {
         return numbers;
     }
 
+    public File getInputFile1() {
+        return inputFile1;
+    }
+
+    public File getInputFile2() {
+        return inputFile2;
+    }
+
+    public int getK() {
+        return k;
+    }
+
+    public FileWriter getOutputFileWriter() {
+        return outputFileWriter;
+    }
 }

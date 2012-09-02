@@ -9,13 +9,6 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created with IntelliJ IDEA.
- * User: hephzibah
- * Date: 8/26/12
- * Time: 7:45 PM
- * To change this template use File | Settings | File Templates.
- */
 public class BaseTest {
     @Before
     public void initialize() throws Exception {
